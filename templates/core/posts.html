@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}  
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="navbar-brand">Post Admin</div>
+<div class="collapse navbar-collapse" id="navbarNav">
+    <div class="navbar-nav">
+        <li class="nav-itme active">
+            <a href="{% url 'app:add' %}" class="nav-link">Add New</a>
+        </li>
+    </div>
+</div>
+</nav>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for post in post_list %}
+                <div class="col-md-4">
+                    <div class="card md-4 box-shadow">
+                        <img src="https://via:placehodler.com/150x100" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="lead"><a href="{% url 'app:single' post.pk%}" class="text-dark">{{post.title}}</a></h4>
+                            <p class="card-text"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{post.get_absolute_url}}" role="button" class="btn btn-sm btn-outline-primary">View</a>
+                                    <a href="{% url 'app:edit' post.pk %}" role="button" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'app:delete' post.pk %}" role="button" class="btn btn-sm btn-outline-primary">Delete</a>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
